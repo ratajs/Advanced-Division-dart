@@ -25,3 +25,5 @@ You can also use it as a console application (download it from the â€œReleasesâ€
 
 <pre>$ ./advdiv 123.1 7.54 24
 16.[329475122578570854432923398440639819950164777750984647536371674302708785467406157061]</pre>
+
+You can check the [JavaScript](https://github.com/ratajs/Advanced-Division) and [Python](https://github.com/ratajs/Advanced-Division-py) versions as well.
