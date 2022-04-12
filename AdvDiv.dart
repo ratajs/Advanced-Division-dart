@@ -5,7 +5,7 @@ String times10(String nstring) {
 		return nstring.split(".")[0]+nstring.split(".")[1][0]+"."+nstring.split(".")[1].substring(1);
 	return nstring+"0";
 }
-String? advdiv(double n1d, double n2d, int ri, [final String rstr1 = "[", final String rstr2 = "]"]) {
+String? advdiv(double n1d, double n2d, [int ri = 0, final String rstr1 = "[", final String rstr2 = "]"]) {
 	bool over = false;
 	int carry = 0, newcarry = 0, x, d;
 	int? rcount = null;
@@ -25,6 +25,10 @@ String? advdiv(double n1d, double n2d, int ri, [final String rstr1 = "[", final 
 	r = ri.toString();
 	n1string = n1d.toString();
 	n2string = n2d.toString();
+	if(n1string.endsWith(".0"))
+		n1string = n1string.replaceAll(".0", "");
+	if(n2string.endsWith(".0"))
+		n2string = n2string.replaceAll(".0", "");
 
 	while(n1string.contains(".") || n2string.contains(".")) {
 		if(!n1string.contains(".")) {
@@ -41,6 +45,10 @@ String? advdiv(double n1d, double n2d, int ri, [final String rstr1 = "[", final 
 			};
 		};
 		n2string = times10(n2string);
+		if(n1string.endsWith(".0"))
+			n1string = n1string.replaceAll(".0", "");
+		if(n2string.endsWith(".0"))
+			n2string = n2string.replaceAll(".0", "");
 	};
 
 	n1 = int.parse(n1string);
