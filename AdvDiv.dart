@@ -79,11 +79,11 @@ String? advdiv(double n1, double n2d, [int ri = 0, final String rstr1 = "[", fin
 
 		newcarry = (int.parse(times10(carry.toString())) + int.parse(n1s[x])) - n2 * ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2);
 
-		if(newcarry==0 && r=="0") {
-			res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2).toString();
-			return sign+res.replaceAll(RegExp(r'^0+|0$'), "").replaceFirst(RegExp(r'^\.'), "0.").replaceFirst(RegExp(r'\.$'), "");
-		};
 		if(over) {
+			if(newcarry==0 && r=="0") {
+				res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2).toString();
+				return sign+res.replaceAll(RegExp(r'^0+|0$'), "").replaceFirst(RegExp(r'^\.'), "0.").replaceFirst(RegExp(r'\.$'), "");
+			};
 			for(y = 0; y < carries.length; y++) {
 				if(carries[y]==newcarry && (y % r.length)==((rcount + 1) % r.length)) {
 					res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2).toString();
