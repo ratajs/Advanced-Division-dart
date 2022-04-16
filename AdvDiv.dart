@@ -5,32 +5,31 @@ String times10(String nstring) {
 		return nstring.split(".")[0]+nstring.split(".")[1][0]+"."+nstring.split(".")[1].substring(1);
 	return nstring+"0";
 }
-String? advdiv(double n1d, double n2d, [int ri = 0, final String rstr1 = "[", final String rstr2 = "]"]) {
+String? advdiv(double n1, double n2d, [int ri = 0, final String rstr1 = "[", final String rstr2 = "]"]) {
 	bool over = false;
-	int carry = 0, newcarry = 0, x, d;
-	int? rcount = null;
-	String n1string, n2string, r, res = "";
-	List<int> carries;
+	int carry = 0, newcarry = 0, rcount = -1, x, y, d;
+	String n1string, n2string, r, res = "", result;
+	List<int> carries = [];
 	List<String> n1s;
-	late final int n1, n2, dotx;
+	late final int n2, dotx;
 	late final String sign;
 	late final List<String> n1s1;
 
 	if(n2d==0)
 		return null;
-	sign = (n1d < 0 ? n2d >= 0 : n2d < 0) ? "-" : "";
-	n1d = n1d.abs();
+	sign = (n1 < 0 ? n2d >= 0 : n2d < 0) ? "-" : "";
+	n1 = n1.abs();
 	n2d = n2d.abs();
 	ri = ri.abs();
 	r = ri.toString();
-	n1string = n1d.toString();
+	n1string = n1.toString();
 	n2string = n2d.toString();
 	if(n1string.endsWith(".0"))
-		n1string = n1string.replaceAll(".0", "");
+		n1string = n1string.replaceFirst(".0", "");
 	if(n2string.endsWith(".0"))
-		n2string = n2string.replaceAll(".0", "");
+		n2string = n2string.replaceFirst(".0", "");
 
-	while(n1string.contains(".") || n2string.contains(".")) {
+	while(n2string.contains(".")) {
 		if(!n1string.contains(".")) {
 			n1string+= r[0];
 			if(r.length > 1)
@@ -38,11 +37,6 @@ String? advdiv(double n1d, double n2d, [int ri = 0, final String rstr1 = "[", fi
 		}
 		else {
 			n1string = times10(n1string);
-			if(n1string.contains(".")) {
-				n1string+= r[0];
-				if(r.length > 1)
-					r = r.substring(1)+r[0];
-			};
 		};
 		n2string = times10(n2string);
 		if(n1string.endsWith(".0"))
@@ -51,7 +45,7 @@ String? advdiv(double n1d, double n2d, [int ri = 0, final String rstr1 = "[", fi
 			n2string = n2string.replaceAll(".0", "");
 	};
 
-	n1 = int.parse(n1string);
+	n1 = double.parse(n1string);
 	n2 = int.parse(n2string);
 	n1s = n1string.split("");
 	n1s1 = n1string.split(".")[0].split("");
@@ -69,7 +63,8 @@ String? advdiv(double n1d, double n2d, [int ri = 0, final String rstr1 = "[", fi
 
 	dotx = x;
 	res+= ".";
-	carries = [carry];
+	if(!n1s.contains("."))
+		n1s.add(".");
 
 	while(n1s.length <= x)
 		n1s.add("");
@@ -77,27 +72,35 @@ String? advdiv(double n1d, double n2d, [int ri = 0, final String rstr1 = "[", fi
 	while(true) {
 		x++;
 		if(x >= n1s.length) {
-			if(rcount==null)
-				rcount = 0;
-			else
-				rcount++;
+			rcount++;
 			over = true;
 			n1s.add(r[rcount % r.length]);
 		};
 
 		newcarry = (int.parse(times10(carry.toString())) + int.parse(n1s[x])) - n2 * ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2);
 
-		if((newcarry==0 && r=="0") || List.generate(carries.length, (int y) => y).any((y) => carries[y]==newcarry && (y % r.length)==((x - dotx) % r.length)))
+		if(newcarry==0 && r=="0") {
 			res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2).toString();
-		if(newcarry==0 && r=="0")
 			return sign+res.replaceAll(RegExp(r'^0+|0$'), "").replaceFirst(RegExp(r'^\.'), "0.").replaceFirst(RegExp(r'\.$'), "");
-		if(List.generate(carries.length, (int y) => y).any((y) => carries[y]==newcarry && (y % r.length)==((x - dotx) % r.length)))
-			return sign+(res.substring(0, dotx + List.generate(carries.length, (int y) => y).firstWhere((y) => carries[y]==newcarry && (y % r.length)==((x - dotx) % r.length)) + 1)+rstr1+res.substring(dotx + List.generate(carries.length, (int y) => y).firstWhere((y) => carries[y]==newcarry && (y % r.length)==((x - dotx) % r.length)) + 1)+rstr2).replaceFirst(RegExp(r'^0+'), "").replaceFirst(RegExp(r'^\.'), "0.");
+		};
+		if(over) {
+			for(y = 0; y < carries.length; y++) {
+				if(carries[y]==newcarry && (y % r.length)==((rcount + 1) % r.length)) {
+					res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2).toString();
+					result = sign+(res.substring(0, x - rcount + y)+"["+res.substring(x - rcount + y)+"]").replaceFirst(RegExp(r'^0+'), "").replaceFirst(RegExp(r'^\.'), "0.");
+					if(result[result.indexOf("[") - 1]==result[result.indexOf("]") - 1])
+						result = result.substring(0, result.indexOf("[") - 1)+"["+result[result.indexOf("[") - 1]+result.substring(result.indexOf("[") + 1, result.indexOf("]") - 1)+"]";
+					if(result.indexOf("]")==result.indexOf("[") + 3 && result[result.indexOf("[") + 1]==result[result.indexOf("[") + 2])
+						result = result.substring(0, result.indexOf("[") + 2)+"]";
+					return result.replaceFirst("[", rstr1).replaceFirst("]", rstr2);
+				};
+			};
+		};
 
 		res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2).toString();
-		carry = newcarry;
 		if(over)
 			carries.add(carry);
+		carry = newcarry;
 	};
 }
 
