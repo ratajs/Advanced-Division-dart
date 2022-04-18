@@ -12,7 +12,7 @@ Import code:
 You can use the `advdiv` function with this syntax:
 
 <code>
-  advdiv(double n1, double, n2, int r, String rstr = "[", String rstr2 = "]")
+  advdiv(double n1, double n2, int r, String rstr = "[", String rstr2 = "]")
 </code>
 
 * n1 – first number
