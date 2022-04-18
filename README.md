@@ -1,13 +1,19 @@
+![](https://raw.githubusercontent.com/ratajs/Advanced-Division/master/imgs/icon.svg)
+
 # Advanced-Division-dart
 Divide two numbers using recurring decimals
+
+Import code:
+<code>
+  import 'AdvDiv.dart'; 
+</code>
+
 
 You can use the `advdiv` function with this syntax:
 
 <code>
-advdiv(double n1, double, n2, int r, String rstr = "[", String rstr2 = "]")
+  advdiv(double n1, double, n2, int r, String rstr = "[", String rstr2 = "]")
 </code>
-
-This function relies on the `times10` function, which is eke in this file.
 
 * n1 – first number
 * n2 – second number
@@ -26,4 +32,4 @@ You can also use it as a console application (download it from the “Releases�
 <pre>$ ./advdiv 123.1 7.54 24
 16.[329475122578570854432923398440639819950164777750984647536371674302708785467406157061]</pre>
 
-You can look at the [JavaScript](https://github.com/ratajs/Advanced-Division-js) and [Python](https://github.com/ratajs/Advanced-Division-py) versions as well.
+Learn more: <https://advdiv.ratajs.cz>
