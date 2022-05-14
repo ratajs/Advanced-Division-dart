@@ -1,0 +1,8 @@
+name: advdiv
+description: Divide two numbers using recurring decimals.
+version: 1.1.0
+homepage: https://advdiv.ratajs.cz/
+repository: https://github.com/ratajs/Advanced-Division-dart.git
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+
