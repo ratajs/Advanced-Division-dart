@@ -19,7 +19,7 @@ You can use the `advdiv` function with this syntax:
 * n2 – second number
 * r – recurring decimals of the first number (default 0)
 * rstr1 – string to be inserted before recursive decimals (default "[")
-* rstr2 – string to be inserted after recursive decimals (default "[")
+* rstr2 – string to be inserted after recursive decimals (default "]")
 
 You can also use it as a console application (download it from the “Releases” section), examples:
 
