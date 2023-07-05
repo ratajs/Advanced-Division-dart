@@ -16,12 +16,13 @@ String? advdiv(double n1, double n2d, [int r1i = 0, int r2i = 0, final String rs
 	late final String sign, n1m, n2m;
 	late final List<String> n1s1;
 
-	if(n2d==0)
+	if(n2d==0 && r2i==0)
 		return null;
 	sign = (n1 < 0 ? n2d >= 0 : n2d < 0) ? "-" : "";
 	n1 = n1.abs();
 	n2d = n2d.abs();
 	r1i = r1i.abs();
+	r2i = r2i.abs();
 	r1 = r1i.toString();
 	n1string = n1.toString();
 	n2string = n2d.toString();
