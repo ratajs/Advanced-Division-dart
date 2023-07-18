@@ -46,9 +46,9 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 		n2 = "0"+n2;
 
 	r1 = RegExp(RegExp.escape(rstr1)+r'(.+)'+RegExp.escape(rstr2)).firstMatch(n1)?[1] ?? "0";
-	n1 = n1.split(rstr1)[0].replaceFirst(RegExp(r'^0+'), "0").replaceFirst(RegExp(r'\.0*$'), "");
+	n1 = n1.split(rstr1)[0].replaceFirst(RegExp(r'^0+'), "0").replaceFirst(RegExp(r'\.$'), "");
 	r2 = RegExp(RegExp.escape(rstr1)+r'(.+)'+RegExp.escape(rstr2)).firstMatch(n2)?[1] ?? "0";
-	n2 = n2.split(rstr1)[0].replaceFirst(RegExp(r'^0+'), "0").replaceFirst(RegExp(r'\.0*$'), "");
+	n2 = n2.split(rstr1)[0].replaceFirst(RegExp(r'^0+'), "0").replaceFirst(RegExp(r'\.$'), "");
 
 
 	if(n2=="0" && RegExp(r'^0+$').hasMatch(r2))
