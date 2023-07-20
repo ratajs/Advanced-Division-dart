@@ -74,7 +74,7 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 		else
 			m2 = int.parse("1"+List.filled(r2.length, "0").join("")) - 1;
 
-		return sign+advdiv((n1mc * m2).toString(), (m1 * n2mc).toString(), "-", ".", rstr1, rstr2)!;
+		return sign+advdiv((n1mc * m2).toString(), (m1 * n2mc).toString(), minstr, decstr, rstr1, rstr2)!;
 	};
 
 	while(n2.contains(".")) {
