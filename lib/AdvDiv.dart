@@ -87,7 +87,7 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 			n1 = times10(n1);
 		};
 		n2 = times10(n2);
-		if(n1.endsWith(".0"))
+		if(n1.endsWith(".0") && r1=="0")
 			n1 = n1.replaceFirst(".0", "");
 		if(n2.endsWith(".0"))
 			n2 = n2.replaceFirst(".0", "");
