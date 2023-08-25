@@ -26,18 +26,18 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 		return null;
 
 	if(n1.startsWith(minstr)) {
-		n1 = n1.replaceFirst(minstr, "");
+		n1 = n1.substring(minstr.length);
 		neg = true;
 	};
 	if(n2.startsWith(minstr)) {
-		n2 = n2.replaceFirst(minstr, "");
+		n2 = n2.substring(minstr.length);
 		neg = !neg;
 	};
 
 	sign = neg ? minstr : "";
 
-	n1 = n1.replaceAll(decstr, ".");
-	n2 = n2.replaceAll(decstr, ".");
+	n1 = n1.replaceFirst(decstr, ".");
+	n2 = n2.replaceFirst(decstr, ".");
 
 	if(n1[0]==".")
 		n1 = "0"+n1;
@@ -83,9 +83,8 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 			if(r1.length > 1)
 				r1 = r1.substring(1)+r1[0];
 		}
-		else {
+		else
 			n1 = times10(n1);
-		};
 		n2 = times10(n2);
 		if(n1.endsWith(".0") && r1=="0")
 			n1 = n1.replaceFirst(".0", "");
@@ -151,15 +150,24 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 }
 
 void main(List<String> args) {
-	String n1, n2;
-
-	if(args.length < 2) {
-		print("Usage: advdiv n1 n2");
-		return;
+	switch(args.length) {
+		case 6:
+			print(advdiv(args[0], args[1], args[2], args[3], args[4], args[5]) ?? "Error");
+			break;
+		case 5:
+			print(advdiv(args[0], args[1], args[2], args[3], args[4], "") ?? "Error");
+			break;
+		case 4:
+			print(advdiv(args[0], args[1], args[2], args[3]) ?? "Error");
+			break;
+		case 3:
+			print(advdiv(args[0], args[1], args[2]) ?? "Error");
+			break;
+		case 2:
+			print(advdiv(args[0], args[1]) ?? "Error");
+			break;
+		default:
+			print("Usage: advdiv n1 n2");
+			return;
 	};
-
-	n1 = args[0];
-	n2 = args[1];
-
-	print(advdiv(n1, n2) ?? "Error");
 }
