@@ -132,12 +132,12 @@ String? advdiv(String n1, String n2, [final String minstr = "-", final String de
 			for(y = 0; y < carries.length; y++) {
 				if(carries[y]==newcarry && (y % r1.length)==((rcount + 1) % r1.length)) {
 					res+= ((int.parse(times10(carry.toString())) + int.parse(n1s[x])) ~/ n2i).toString();
-					result = sign+(res.substring(0, x - rcount + y)+"["+res.substring(x - rcount + y)+"]").replaceFirst(RegExp(r'^0+'), "").replaceFirst(RegExp(r'^\.'), "0.");
+					result = (res.substring(0, x - rcount + y)+"["+res.substring(x - rcount + y)+"]").replaceFirst(RegExp(r'^0+'), "").replaceFirst(RegExp(r'^\.'), "0.");
 					if(result[result.indexOf("[") - 1]==result[result.indexOf("]") - 1])
 						result = result.substring(0, result.indexOf("[") - 1)+"["+result[result.indexOf("[") - 1]+result.substring(result.indexOf("[") + 1, result.indexOf("]") - 1)+"]";
 					if(result.indexOf("]")==result.indexOf("[") + 3 && result[result.indexOf("[") + 1]==result[result.indexOf("[") + 2])
 						result = result.substring(0, result.indexOf("[") + 2)+"]";
-					return result.replaceFirst(".", decstr).replaceFirst("[", rstr1).replaceFirst("]", rstr2);
+					return sign+result.replaceAllMapped(RegExp(r'[.[\]]'), (final Match m) => (m[0]=="." ? decstr : (m[0]=="[" ? rstr1 : rstr2)));
 				};
 			};
 		};
